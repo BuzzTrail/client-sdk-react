@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useVapiWidget } from '../hooks';
+import { useBuzzTrailWidget } from '../hooks';
 
-import { VapiWidgetProps, ColorScheme, StyleConfig } from './types';
+import { BuzzTrailWidgetProps, ColorScheme, StyleConfig } from './types';
 
 import { sizeStyles, radiusStyles, positionStyles } from './constants';
 
@@ -17,7 +17,7 @@ import HybridControls from './widget/controls/HybridControls';
 
 import '../styles/animations.css';
 
-const VapiWidget: React.FC<VapiWidgetProps> = ({
+const BuzzTrailWidget: React.FC<BuzzTrailWidgetProps> = ({
   publicKey,
   assistantId,
   assistant,
@@ -67,7 +67,7 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
   consentContent,
   termsContent = 'By clicking "Agree," and each time I interact with this AI agent, I consent to the recording, storage, and sharing of my communications with third-party service providers, and as otherwise described in our Terms of Service.', // deprecated
   consentStorageKey,
-  localStorageKey = 'vapi_widget_consent', // deprecated
+  localStorageKey = 'buzztrail_widget_consent', // deprecated
   // Event handlers
   onVoiceStart,
   onCallStart, // deprecated
@@ -110,7 +110,7 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
   const effectiveOnVoiceEnd = onVoiceEnd ?? onCallEnd;
   const effectiveChatPlaceholder = chatPlaceholder ?? 'Type your message...';
 
-  const vapi = useVapiWidget({
+  const buzztrail = useBuzzTrailWidget({
     mode,
     publicKey,
     assistantId,
@@ -178,12 +178,12 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
   });
 
   const getConversationLayoutStyle = (): React.CSSProperties => {
-    const isEmpty = vapi.conversation.length === 0;
+    const isEmpty = buzztrail.conversation.length === 0;
     const hideTranscript =
       !effectiveVoiceShowTranscript &&
-      vapi.voice.isCallActive &&
+      buzztrail.voice.isCallActive &&
       (mode === 'voice' || mode === 'hybrid');
-    const showingEmptyState = mode === 'voice' && !vapi.voice.isCallActive;
+    const showingEmptyState = mode === 'voice' && !buzztrail.voice.isCallActive;
 
     if (isEmpty || hideTranscript || showingEmptyState) {
       return {
@@ -212,7 +212,7 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
 
   useEffect(() => {
     conversationEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [vapi.conversation, vapi.chat.isTyping]);
+  }, [buzztrail.conversation, buzztrail.chat.isTyping]);
 
   useEffect(() => {
     if (isExpanded && (mode === 'chat' || mode === 'hybrid')) {
@@ -232,7 +232,7 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
   };
 
   const handleToggleCall = async () => {
-    await vapi.voice.toggleCall();
+    await buzztrail.voice.toggleCall();
   };
 
   const handleSendMessage = async () => {
@@ -241,21 +241,21 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
     const message = chatInput.trim();
     setChatInput('');
 
-    await vapi.chat.sendMessage(message);
+    await buzztrail.chat.sendMessage(message);
     inputRef.current?.focus();
   };
 
   const handleChatInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setChatInput(value);
-    vapi.chat.handleInput(value);
+    buzztrail.chat.handleInput(value);
   };
 
   const handleReset = () => {
-    vapi.clearConversation();
+    buzztrail.clearConversation();
 
-    if (vapi.voice.isCallActive) {
-      vapi.voice.endCall();
+    if (buzztrail.voice.isCallActive) {
+      buzztrail.voice.endCall();
     }
 
     setChatInput('');
@@ -272,11 +272,11 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
   };
 
   const renderConversationMessages = () => {
-    if (vapi.conversation.length === 0) {
+    if (buzztrail.conversation.length === 0) {
       return (
         <EmptyConversation
           mode={mode}
-          isCallActive={vapi.voice.isCallActive}
+          isCallActive={buzztrail.voice.isCallActive}
           theme={styles.theme}
           voiceEmptyMessage={effectiveVoiceEmptyMessage}
           voiceActiveEmptyMessage={effectiveVoiceActiveEmptyMessage}
@@ -288,7 +288,7 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
 
     return (
       <>
-        {vapi.conversation.map((message, index) => {
+        {buzztrail.conversation.map((message, index) => {
           try {
             const key = message?.id || `${message.role}-${index}`;
             return (
@@ -299,9 +299,9 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
                 colors={colors}
                 styles={styles}
                 isLoading={
-                  index === vapi.conversation.length - 1 &&
+                  index === buzztrail.conversation.length - 1 &&
                   message.role === 'assistant' &&
-                  vapi.chat.isTyping
+                  buzztrail.chat.isTyping
                 }
               />
             );
@@ -323,7 +323,7 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
 
     // Hybrid mode: show messages when call is not active, respect showTranscript when active
     if (mode === 'hybrid') {
-      if (!vapi.voice.isCallActive) {
+      if (!buzztrail.voice.isCallActive) {
         return renderConversationMessages();
       } else if (effectiveVoiceShowTranscript) {
         return renderConversationMessages();
@@ -331,11 +331,11 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
         return (
           <AnimatedStatusIcon
             size={150}
-            connectionStatus={vapi.voice.connectionStatus}
-            isCallActive={vapi.voice.isCallActive}
-            isSpeaking={vapi.voice.isSpeaking}
-            isTyping={vapi.chat.isTyping}
-            volumeLevel={vapi.voice.volumeLevel}
+            connectionStatus={buzztrail.voice.connectionStatus}
+            isCallActive={buzztrail.voice.isCallActive}
+            isSpeaking={buzztrail.voice.isSpeaking}
+            isTyping={buzztrail.chat.isTyping}
+            volumeLevel={buzztrail.voice.volumeLevel}
             baseColor={colors.accentColor}
             colors={colors.accentColor}
           />
@@ -345,18 +345,18 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
 
     // Voice mode: respect showTranscript when call is active
     if (mode === 'voice') {
-      if (vapi.voice.isCallActive) {
+      if (buzztrail.voice.isCallActive) {
         if (effectiveVoiceShowTranscript) {
           return renderConversationMessages();
         } else {
           return (
             <AnimatedStatusIcon
               size={150}
-              connectionStatus={vapi.voice.connectionStatus}
-              isCallActive={vapi.voice.isCallActive}
-              isSpeaking={vapi.voice.isSpeaking}
-              isTyping={vapi.chat.isTyping}
-              volumeLevel={vapi.voice.volumeLevel}
+              connectionStatus={buzztrail.voice.connectionStatus}
+              isCallActive={buzztrail.voice.isCallActive}
+              isSpeaking={buzztrail.voice.isSpeaking}
+              isTyping={buzztrail.chat.isTyping}
+              volumeLevel={buzztrail.voice.volumeLevel}
               baseColor={colors.accentColor}
               colors={colors.accentColor}
             />
@@ -369,7 +369,7 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
     return (
       <EmptyConversation
         mode={mode}
-        isCallActive={vapi.voice.isCallActive}
+        isCallActive={buzztrail.voice.isCallActive}
         theme={styles.theme}
         voiceEmptyMessage={effectiveVoiceEmptyMessage}
         voiceActiveEmptyMessage={effectiveVoiceActiveEmptyMessage}
@@ -383,9 +383,9 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
     if (mode === 'voice') {
       return (
         <VoiceControls
-          isCallActive={vapi.voice.isCallActive}
-          connectionStatus={vapi.voice.connectionStatus}
-          isAvailable={vapi.voice.isAvailable}
+          isCallActive={buzztrail.voice.isCallActive}
+          connectionStatus={buzztrail.voice.connectionStatus}
+          isAvailable={buzztrail.voice.isAvailable}
           onToggleCall={handleToggleCall}
           startButtonText={effectiveStartButtonText}
           endButtonText={effectiveEndButtonText}
@@ -398,7 +398,7 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
       return (
         <ChatControls
           chatInput={chatInput}
-          isAvailable={vapi.chat.isAvailable}
+          isAvailable={buzztrail.chat.isAvailable}
           onInputChange={handleChatInputChange}
           onSendMessage={handleSendMessage}
           colors={colors}
@@ -413,10 +413,10 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
       return (
         <HybridControls
           chatInput={chatInput}
-          isCallActive={vapi.voice.isCallActive}
-          connectionStatus={vapi.voice.connectionStatus}
-          isChatAvailable={vapi.chat.isAvailable}
-          isVoiceAvailable={vapi.voice.isAvailable}
+          isCallActive={buzztrail.voice.isCallActive}
+          connectionStatus={buzztrail.voice.connectionStatus}
+          isChatAvailable={buzztrail.chat.isAvailable}
+          isVoiceAvailable={buzztrail.voice.isAvailable}
           onInputChange={handleChatInputChange}
           onSendMessage={handleSendMessage}
           onToggleCall={handleToggleCall}
@@ -450,11 +450,11 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
       <div style={getExpandedWidgetStyle()}>
         <WidgetHeader
           mode={mode}
-          connectionStatus={vapi.voice.connectionStatus}
-          isCallActive={vapi.voice.isCallActive}
-          isSpeaking={vapi.voice.isSpeaking}
-          isTyping={vapi.chat.isTyping}
-          hasActiveConversation={vapi.conversation.length > 0}
+          connectionStatus={buzztrail.voice.connectionStatus}
+          isCallActive={buzztrail.voice.isCallActive}
+          isSpeaking={buzztrail.voice.isSpeaking}
+          isTyping={buzztrail.chat.isTyping}
+          hasActiveConversation={buzztrail.conversation.length > 0}
           mainLabel={effectiveTextWidgetTitle}
           onClose={() => setIsExpanded(false)}
           onReset={handleReset}
@@ -464,7 +464,7 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
 
         {/* Conversation Area */}
         <div
-          className="vapi-conversation-area"
+          className="buzztrail-conversation-area"
           style={{
             ...getConversationAreaStyle(),
             ...getConversationLayoutStyle(),
@@ -480,7 +480,7 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
   };
 
   return (
-    <div className="vapi-widget-wrapper">
+    <div className="buzztrail-widget-wrapper">
       <div
         style={{
           position: 'fixed',
@@ -492,11 +492,11 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
           renderExpandedWidget()
         ) : (
           <FloatingButton
-            isCallActive={vapi.voice.isCallActive}
-            connectionStatus={vapi.voice.connectionStatus}
-            isSpeaking={vapi.voice.isSpeaking}
-            isTyping={vapi.chat.isTyping}
-            volumeLevel={vapi.voice.volumeLevel}
+            isCallActive={buzztrail.voice.isCallActive}
+            connectionStatus={buzztrail.voice.connectionStatus}
+            isSpeaking={buzztrail.voice.isSpeaking}
+            isTyping={buzztrail.chat.isTyping}
+            volumeLevel={buzztrail.voice.volumeLevel}
             onClick={handleFloatingButtonClick}
             onToggleCall={handleToggleCall}
             mainLabel={effectiveTextWidgetTitle}
@@ -512,4 +512,4 @@ const VapiWidget: React.FC<VapiWidgetProps> = ({
   );
 };
 
-export default VapiWidget;
+export default BuzzTrailWidget;

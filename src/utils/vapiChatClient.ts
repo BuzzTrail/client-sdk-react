@@ -6,7 +6,7 @@ export interface AssistantOverrides {
   };
 }
 
-export interface VapiChatMessage {
+export interface BuzzTrailChatMessage {
   input: string | Array<{ role: string; content: string }>;
   assistantId: string;
   assistantOverrides?: AssistantOverrides;
@@ -14,7 +14,7 @@ export interface VapiChatMessage {
   stream?: boolean;
 }
 
-export interface VapiChatStreamChunk {
+export interface BuzzTrailChatStreamChunk {
   id?: string;
   path?: string;
   delta?: string;
@@ -23,12 +23,12 @@ export interface VapiChatStreamChunk {
   [key: string]: any;
 }
 
-export interface VapiChatClientOptions {
+export interface BuzzTrailChatClientOptions {
   apiUrl?: string;
   publicKey: string;
 }
 
-export type StreamCallback = (chunk: VapiChatStreamChunk) => void;
+export type StreamCallback = (chunk: BuzzTrailChatStreamChunk) => void;
 export type ErrorCallback = (error: Error) => void;
 export type CompleteCallback = () => void;
 
@@ -36,18 +36,18 @@ export type CompleteCallback = () => void;
 class RetriableError extends Error {}
 class FatalError extends Error {}
 
-export class VapiChatClient {
+export class BuzzTrailChatClient {
   private apiUrl: string;
   private publicKey: string;
   private abortController: AbortController | null = null;
 
-  constructor(options: VapiChatClientOptions) {
+  constructor(options: BuzzTrailChatClientOptions) {
     this.publicKey = options.publicKey;
-    this.apiUrl = options.apiUrl || 'https://api.vapi.ai';
+    this.apiUrl = options.apiUrl || 'https://api.buzztrail.ai';
   }
 
   async streamChat(
-    message: VapiChatMessage,
+    message: BuzzTrailChatMessage,
     onChunk: StreamCallback,
     onError?: ErrorCallback,
     onComplete?: CompleteCallback
@@ -64,7 +64,7 @@ export class VapiChatClient {
         headers: {
           Authorization: `Bearer ${this.publicKey}`,
           'Content-Type': 'application/json',
-          'X-Client-ID': 'vapi-widget',
+          'X-Client-ID': 'buzztrail-widget',
         },
         body: JSON.stringify({
           ...message,
@@ -98,7 +98,7 @@ export class VapiChatClient {
           }
 
           try {
-            const chunk = JSON.parse(event.data) as VapiChatStreamChunk;
+            const chunk = JSON.parse(event.data) as BuzzTrailChatStreamChunk;
             // Only emit chunks that have relevant content
             if (
               chunk.delta !== undefined ||
@@ -152,7 +152,7 @@ export class VapiChatClient {
 }
 
 export function extractContentFromPath(
-  chunk: VapiChatStreamChunk
+  chunk: BuzzTrailChatStreamChunk
 ): string | null {
   // Check if this is a content chunk with delta and path
   if (chunk.delta && chunk.path === 'chat.output[0].content') {

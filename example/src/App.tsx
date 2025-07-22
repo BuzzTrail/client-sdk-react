@@ -1,11 +1,11 @@
 /// <reference types="vite/client" />
 
 import { useState } from 'react';
-import { VapiWidget } from '../../src';
+import { BuzzTrailWidget } from '../../src';
 import WidgetPreview from './components/WidgetPreview';
 import AnimatedStatusIconPreview from './components/AnimatedStatusIconPreview';
 import type { WidgetConfig } from './types';
-import VapiLogomark from '../logomark-primary.svg';
+import BuzzTrailLogomark from '../logomark-primary.svg';
 
 import NavigationTabs from './components/builder/NavigationTabs';
 import WidgetEmbedSection from './components/builder/WidgetEmbedSection';
@@ -14,13 +14,13 @@ import AppearanceSection from './components/builder/AppearanceSection';
 import LayoutSection from './components/builder/LayoutSection';
 import TextLabelsSection from './components/builder/TextLabelsSection';
 import LegalConsentSection from './components/builder/LegalConsentSection';
-import VapiConfigurationSection from './components/builder/VapiConfigurationSection';
+import BuzzTrailConfigurationSection from './components/builder/BuzzTrailConfigurationSection';
 
 function App() {
   const [config, setConfig] = useState<WidgetConfig>({
     mode: 'chat',
     theme: 'light',
-    // Default colors matching VapiWidget defaults
+    // Default colors matching BuzzTrailWidget defaults
     baseBgColor: '#ffffff', // Light mode default (automatically switches to #000000 in dark mode)
     accentColor: '#14B8A6', // Default teal accent
     ctaButtonColor: '#000000', // Default black for buttons
@@ -37,12 +37,12 @@ function App() {
     consentTitle: 'Terms and conditions',
     consentContent:
       'By clicking "Agree," and each time I interact with this AI agent, I consent to the recording, storage, and sharing of my communications with third-party service providers, and as otherwise described in our Terms of Service.',
-    consentStorageKey: 'vapi_widget_consent',
+    consentStorageKey: 'buzztrail_widget_consent',
     voiceShowTranscript: false,
     chatFirstMessage: 'Hey, How can I help you today?',
-    // Vapi Configuration
-    publicKey: import.meta.env.VITE_VAPI_API_KEY || 'your-vapi-public-key',
-    assistantId: import.meta.env.VITE_VAPI_ASSISTANT_ID || 'demo-assistant-id',
+    // BuzzTrail Configuration
+    publicKey: import.meta.env.VITE_BUZZTRAIL_API_KEY || 'your-buzztrail-public-key',
+    assistantId: import.meta.env.VITE_BUZZTRAIL_ASSISTANT_ID || 'demo-assistant-id',
     assistantOverrides: {
       variableValues: { name: 'John' },
     },
@@ -90,7 +90,7 @@ function App() {
       .filter(Boolean)
       .join(' ');
 
-    return `<vapi-widget ${attributes}></vapi-widget>`;
+    return `<buzztrail-widget ${attributes}></buzztrail-widget>`;
   };
 
   const copyToClipboard = (text: string) => {
@@ -114,12 +114,12 @@ function App() {
                 <div className="px-6 py-4 border-b border-gray-200">
                   <div className="flex items-center space-x-2">
                     <img
-                      src={VapiLogomark}
-                      alt="Vapi Logo"
+                      src={BuzzTrailLogomark}
+                      alt="BuzzTrail Logo"
                       className="w-6 h-6"
                     />
                     <h1 className="text-xl font-semibold text-gray-900">
-                      VAPI Widget Builder
+                      BUZZTRAIL Widget Builder
                     </h1>
                   </div>
                 </div>
@@ -163,8 +163,8 @@ function App() {
                     updateConfig={updateConfig}
                   />
 
-                  {/* Vapi Configuration Section */}
-                  <VapiConfigurationSection
+                  {/* BuzzTrail Configuration Section */}
+                  <BuzzTrailConfigurationSection
                     config={config}
                     updateConfig={updateConfig}
                   />
@@ -177,7 +177,7 @@ function App() {
           </div>
 
           {/* Live Widget - Only show for widget view */}
-          <VapiWidget
+          <BuzzTrailWidget
             publicKey={config.publicKey}
             assistantId={config.assistantId}
             assistantOverrides={config.assistantOverrides}

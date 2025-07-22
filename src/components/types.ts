@@ -1,8 +1,8 @@
-export interface VapiWidgetProps {
+export interface BuzzTrailWidgetProps {
   // API Configuration
   apiUrl?: string;
 
-  // Vapi Configuration
+  // BuzzTrail Configuration
   publicKey: string;
   assistantId?: string; // Supported by both voice and chat
   assistant?: any; // Assistant object - voice only

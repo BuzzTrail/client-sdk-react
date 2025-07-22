@@ -1,6 +1,6 @@
 {
-  "name": "@vapi-ai/client-sdk-react",
-  "description": "Vapi Client React SDK",
+  "name": "@buzztrail-ai/client-sdk-react",
+  "description": "BuzzTrail Client React SDK",
   "version": "0.0.9",
   "type": "module",
   "publishConfig": {
@@ -44,8 +44,8 @@
     "test:ci:only": "playwright test --reporter=list"
   },
   "author": {
-    "name": "Vapi AI",
-    "url": "https://vapi.ai"
+    "name": "BuzzTrail AI",
+    "url": "https://buzztrail.ai"
   },
   "contributors": [
     {
@@ -53,13 +53,13 @@
       "url": "https://github.com/ramsrib"
     }
   ],
-  "homepage": "https://github.com/VapiAI/client-sdk-react#readme",
-  "repository": "https://github.com/VapiAI/client-sdk-react",
+  "homepage": "https://github.com/BuzzTrailAI/client-sdk-react#readme",
+  "repository": "https://github.com/BuzzTrailAI/client-sdk-react",
   "bugs": {
-    "url": "https://github.com/VapiAI/client-sdk-react/issues"
+    "url": "https://github.com/BuzzTrailAI/client-sdk-react/issues"
   },
   "keywords": [
-    "vapi",
+    "buzztrail",
     "react",
     "components",
     "widget",

@@ -79,7 +79,7 @@ const LegalConsentSection: React.FC<LegalConsentSectionProps> = ({
               onChange={(e) =>
                 updateConfig('consentStorageKey', e.target.value)
               }
-              placeholder="vapi_widget_consent"
+              placeholder="buzztrail_widget_consent"
             />
             <button
               onClick={() => {

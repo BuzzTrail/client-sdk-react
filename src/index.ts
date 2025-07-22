@@ -2,10 +2,10 @@
 import './styles/globals.css';
 
 // Main library exports
-export { default as VapiWidget } from './components/VapiWidget';
+export { default as BuzzTrailWidget } from './components/BuzzTrailWidget';
 
 // Export types
-export type { VapiWidgetProps } from './components';
+export type { BuzzTrailWidgetProps } from './components';
 
 // Export hooks
 export * from './hooks';

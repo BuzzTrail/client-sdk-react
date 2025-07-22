@@ -1,5 +1,5 @@
 export { default as AnimatedStatusIcon } from './AnimatedStatusIcon';
-export { default as VapiWidget } from './VapiWidget';
+export { default as BuzzTrailWidget } from './BuzzTrailWidget';
 
-export type { VapiWidgetProps } from './types';
+export type { BuzzTrailWidgetProps } from './types';
 export type { AnimatedStatusIconProps } from './AnimatedStatusIcon';

@@ -1,9 +1,9 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
-import type { AssistantOverrides } from '../utils/vapiChatClient';
+import type { AssistantOverrides } from '../utils/buzztrailChatClient';
 import {
-  VapiChatClient,
+  BuzzTrailChatClient,
   extractContentFromPath,
-} from '../utils/vapiChatClient';
+} from '../utils/buzztrailChatClient';
 
 export interface ChatMessage {
   id?: string;
@@ -13,19 +13,19 @@ export interface ChatMessage {
   timestamp: Date;
 }
 
-export interface VapiChatState {
+export interface BuzzTrailChatState {
   messages: ChatMessage[];
   isTyping: boolean;
   isLoading: boolean;
   sessionId?: string;
 }
 
-export interface VapiChatHandlers {
+export interface BuzzTrailChatHandlers {
   sendMessage: (text: string) => Promise<void>;
   clearMessages: () => void;
 }
 
-export interface UseVapiChatOptions {
+export interface UseBuzzTrailChatOptions {
   enabled?: boolean;
   publicKey?: string;
   assistantId?: string;
@@ -42,7 +42,7 @@ export const validateChatInput = (
   enabled: boolean,
   publicKey?: string,
   assistantId?: string,
-  client?: VapiChatClient | null
+  client?: BuzzTrailChatClient | null
 ): void => {
   if (!enabled || !text.trim()) {
     throw new Error('Chat is disabled or message is empty');
@@ -161,7 +161,7 @@ export const handleStreamComplete = (
   }
 };
 
-export const useVapiChat = ({
+export const useBuzzTrailChat = ({
   enabled = true,
   publicKey,
   assistantId,
@@ -171,8 +171,8 @@ export const useVapiChat = ({
   firstChatMessage,
   onMessage,
   onError,
-}: UseVapiChatOptions): VapiChatState &
-  VapiChatHandlers & { isEnabled: boolean } => {
+}: UseBuzzTrailChatOptions): BuzzTrailChatState &
+  BuzzTrailChatHandlers & { isEnabled: boolean } => {
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
     if (enabled && firstChatMessage) {
       return [
@@ -191,14 +191,14 @@ export const useVapiChat = ({
     initialSessionId
   );
 
-  const clientRef = useRef<VapiChatClient | null>(null);
+  const clientRef = useRef<BuzzTrailChatClient | null>(null);
   const abortFnRef = useRef<(() => void) | null>(null);
   const currentAssistantMessageRef = useRef<string>(''); // Accumulates assistant message content
   const assistantMessageIndexRef = useRef<number | null>(null); // Tracks array position
 
   useEffect(() => {
     if (publicKey && enabled) {
-      clientRef.current = new VapiChatClient({ publicKey, apiUrl });
+      clientRef.current = new BuzzTrailChatClient({ publicKey, apiUrl });
     }
 
     return () => {

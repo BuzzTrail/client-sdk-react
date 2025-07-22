@@ -1,12 +1,12 @@
-# VAPI React Client SDK
+# BUZZTRAIL React Client SDK
 
 > ⚠️ **Beta Version**: This library is currently in beta. APIs may change and some features might be unstable. Use with caution in production environments.
 
-A modern React component library with embeddable voice and chat widgets built with Vite, TypeScript, and Tailwind CSS. Featuring seamless VAPI AI integration for voice conversations.
+A modern React component library with embeddable voice and chat widgets built with Vite, TypeScript, and Tailwind CSS. Featuring seamless BUZZTRAIL AI integration for voice conversations.
 
 ## Features
 
-- 🎙️ **Voice Conversations**: Real-time voice calls with VAPI AI assistants
+- 🎙️ **Voice Conversations**: Real-time voice calls with BUZZTRAIL AI assistants
 - 💬 **Chat Interface**: Text-based conversations with markdown support
 - 🔀 **Hybrid Mode**: Seamlessly switch between voice and chat
 - 🎨 **Highly Customizable**: Themes, colors, sizes, and positions
@@ -17,7 +17,7 @@ A modern React component library with embeddable voice and chat widgets built wi
 ## Installation
 
 ```bash
-npm install @vapi-ai/client-sdk-react @vapi-ai/web
+npm install @buzztrail-ai/client-sdk-react @vapi-ai/web
 ```
 
 > **Note**: `@vapi-ai/web` is a peer dependency that must be installed separately to avoid WebRTC connection conflicts.
@@ -30,11 +30,11 @@ The simplest way to add the widget to your website:
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js"></script>
+    <script src="https://unpkg.com/@buzztrail-ai/client-sdk-react/dist/embed/widget.umd.js"></script>
   </head>
   <body>
-    <vapi-widget
-      public-key="your-vapi-public-key"
+    <buzztrail-widget
+      public-key="your-buzztrail-public-key"
       assistant-id="your-assistant-id"
       mode="chat"
       theme="light"
@@ -46,24 +46,24 @@ The simplest way to add the widget to your website:
       cta-title="Chat with us"
       cta-subtitle="24/7 Support"
       chat-placeholder="How can I help you today?"
-    ></vapi-widget>
+    ></buzztrail-widget>
   </body>
 </html>
 ```
 
-## VapiWidget Props
+## BuzzTrailWidget Props
 
 ### Required Props
 
 | Prop        | Type     | Description              |
 | ----------- | -------- | ------------------------ |
-| `publicKey` | `string` | Your VAPI public API key |
+| `publicKey` | `string` | Your BUZZTRAIL public API key |
 
-### VAPI Configuration Props
+### BUZZTRAIL Configuration Props
 
 | Prop                 | Type     | Description                                            |
 | -------------------- | -------- | ------------------------------------------------------ |
-| `assistantId`        | `string` | VAPI assistant ID (supported by both voice and chat)   |
+| `assistantId`        | `string` | BUZZTRAIL assistant ID (supported by both voice and chat)   |
 | `assistant`          | `object` | Full assistant configuration object (voice only)       |
 | `assistantOverrides` | `object` | Assistant overrides (supported by both voice and chat) |
 
@@ -104,7 +104,7 @@ The simplest way to add the widget to your website:
 | `consentRequired`         | `boolean`                                                                         | `false`                  | Show consent form before first use |
 | `consentTitle`            | `string`                                                                          | `"Terms and conditions"` | Consent form title                 |
 | `consentContent`          | `string`                                                                          | _(default message)_      | Terms & conditions content         |
-| `consentStorageKey`       | `string`                                                                          | `"vapi_widget_consent"`  | Key for storing consent            |
+| `consentStorageKey`       | `string`                                                                          | `"buzztrail_widget_consent"`  | Key for storing consent            |
 
 ### Event Callbacks
 
@@ -120,12 +120,12 @@ The simplest way to add the widget to your website:
 If you're using React, you can import and use the widget as a component:
 
 ```tsx
-import { VapiWidget } from '@vapi-ai/client-sdk-react';
+import { BuzzTrailWidget } from '@buzztrail-ai/client-sdk-react';
 
 function App() {
   return (
-    <VapiWidget
-      publicKey="your-vapi-public-key"
+    <BuzzTrailWidget
+      publicKey="your-buzztrail-public-key"
       assistantId="your-assistant-id"
       mode="hybrid"
       position="bottom-right"
@@ -146,7 +146,7 @@ function App() {
 Use the widget as a custom HTML element with kebab-case attributes - the cleanest and most modern approach:
 
 ```html
-<vapi-widget
+<buzztrail-widget
   public-key="pk_123"
   assistant-id="asst_456"
   mode="chat"
@@ -155,7 +155,7 @@ Use the widget as a custom HTML element with kebab-case attributes - the cleanes
   consent-required="true"
   chat-first-message="Welcome! How can I assist you?"
   chat-placeholder="Type your question here..."
-></vapi-widget>
+></buzztrail-widget>
 ```
 
 ### 2. Data Attributes
@@ -164,7 +164,7 @@ Use this approach if your environment doesn't support custom elements or for bet
 
 ```html
 <div
-  data-client-widget="VapiWidget"
+  data-client-widget="BuzzTrailWidget"
   data-public-key="pk_123"
   data-assistant-id="asst_456"
   data-mode="voice"
@@ -178,7 +178,7 @@ Use this approach if your environment doesn't support custom elements or for bet
 ### Voice-Only Mode
 
 ```tsx
-<VapiWidget
+<BuzzTrailWidget
   publicKey="pk_123"
   assistantId="asst_456"
   mode="voice"
@@ -192,7 +192,7 @@ Use this approach if your environment doesn't support custom elements or for bet
 ### Chat-Only Mode
 
 ```tsx
-<VapiWidget
+<BuzzTrailWidget
   publicKey="pk_123"
   assistantId="asst_456"
   mode="chat"
@@ -206,7 +206,7 @@ Use this approach if your environment doesn't support custom elements or for bet
 ### Hybrid Mode with Assistant Overrides
 
 ```tsx
-<VapiWidget
+<BuzzTrailWidget
   publicKey="pk_123"
   assistantId="asst_456"
   assistantOverrides={{
@@ -225,7 +225,7 @@ Use this approach if your environment doesn't support custom elements or for bet
 ### Voice-Only with Full Assistant Object
 
 ```tsx
-<VapiWidget
+<BuzzTrailWidget
   publicKey="pk_123"
   assistant={{
     model: {
@@ -246,7 +246,7 @@ Use this approach if your environment doesn't support custom elements or for bet
 ### Custom Styling
 
 ```tsx
-<VapiWidget
+<BuzzTrailWidget
   publicKey="pk_123"
   assistantId="asst_456"
   baseBgColor="#1a1a1a"
@@ -262,7 +262,7 @@ Use this approach if your environment doesn't support custom elements or for bet
 ### Floating Button with Custom CTA
 
 ```tsx
-<VapiWidget
+<BuzzTrailWidget
   publicKey="pk_123"
   assistantId="asst_456"
   mode="hybrid"
@@ -281,7 +281,7 @@ Use this approach if your environment doesn't support custom elements or for bet
 
 ```bash
 # Clone the repository
-git clone https://github.com/VapiAI/client-sdk-react.git
+git clone https://github.com/BuzzTrailAI/client-sdk-react.git
 cd client-sdk-react
 
 # Install dependencies
@@ -321,7 +321,7 @@ Visit <http://localhost:5173> to see the example app.
 
 - Microphone access for voice mode
 - HTTPS required in production
-- VAPI account and API key
+- BUZZTRAIL account and API key
 
 ## Contributing
 
@@ -333,6 +333,6 @@ Visit <http://localhost:5173> to see the example app.
 
 ## Support
 
-- [Documentation](https://docs.vapi.ai)
-- [VAPI Dashboard](https://dashboard.vapi.ai)
-- [Issues](https://github.com/VapiAI/client-sdk-react/issues)
+- [Documentation](https://docs.buzztrail.ai)
+- [BUZZTRAIL Dashboard](https://dashboard.buzztrail.ai)
+- [Issues](https://github.com/BuzzTrailAI/client-sdk-react/issues)

@@ -1,21 +1,21 @@
-# VAPI Widget Implementation
+# BUZZTRAIL Widget Implementation
 
 ## Overview
 
-The VAPI Widget is a versatile floating conversation component that integrates with VAPI AI to provide voice, chat, or hybrid (voice + chat) interactions on any website. It appears as a floating button that expands into a full conversation interface.
+The BUZZTRAIL Widget is a versatile floating conversation component that integrates with BUZZTRAIL AI to provide voice, chat, or hybrid (voice + chat) interactions on any website. It appears as a floating button that expands into a full conversation interface.
 
 ## Key Features
 
 ### 🎙️ Voice Functionality
 
-- **Real-time Voice Conversations**: Direct integration with VAPI AI for natural voice interactions
+- **Real-time Voice Conversations**: Direct integration with BUZZTRAIL AI for natural voice interactions
 - **Visual Transcript**: Optional live conversation display with user and assistant messages
 - **Voice Level Indicators**: Real-time audio level visualization
 - **Connection Status**: Clear status indicators (connecting, connected, disconnected)
 
 ### 💬 Chat Functionality
 
-- **Text-based Conversations**: Full chat support with VAPI or custom API backend
+- **Text-based Conversations**: Full chat support with BUZZTRAIL or custom API backend
 - **Markdown Support**: Rich text rendering with links, code blocks, lists, and more
 - **Real-time Typing Indicators**: Shows when assistant is typing
 - **Smooth Message Streaming**: Character-by-character message display
@@ -42,36 +42,36 @@ The VAPI Widget is a versatile floating conversation component that integrates w
 - **Event Callbacks**: Comprehensive event handling system
 - **Error Handling**: Graceful error recovery and user feedback
 - **Memory Management**: Proper cleanup and resource management
-- **Flexible Configuration**: Support for all VAPI start() patterns
+- **Flexible Configuration**: Support for all BUZZTRAIL start() patterns
 
 ## Component Architecture
 
-### Core Component: VapiWidget
+### Core Component: BuzzTrailWidget
 
-Located at `src/components/VapiWidget.tsx`, this component handles:
+Located at `src/components/BuzzTrailWidget.tsx`, this component handles:
 
 1. **Multi-mode Support**: Voice-only, chat-only, or hybrid interactions
 2. **State Management**: Call state, conversation history, UI state
-3. **Event Handling**: VAPI events and user interactions
+3. **Event Handling**: BUZZTRAIL events and user interactions
 4. **UI Rendering**: Floating button and expanded interface
 
 ### Custom Hooks
 
-- **useVapiWidget**: Main hook that combines voice and chat functionality
-- **useVapiCall**: Handles voice call integration with VAPI
-- **useVapiChat**: Manages chat functionality with VAPI or custom API
+- **useBuzzTrailWidget**: Main hook that combines voice and chat functionality
+- **useBuzzTrailCall**: Handles voice call integration with BUZZTRAIL
+- **useBuzzTrailChat**: Manages chat functionality with BUZZTRAIL or custom API
 
 ## Implementation Details
 
 ### Props Interface
 
 ```typescript
-interface VapiWidgetProps {
+interface BuzzTrailWidgetProps {
   // Required
-  publicKey: string; // VAPI public key
+  publicKey: string; // BUZZTRAIL public key
 
-  // VAPI Configuration (provide at least one)
-  assistantId?: string; // VAPI assistant ID (supported by both voice and chat)
+  // BUZZTRAIL Configuration (provide at least one)
+  assistantId?: string; // BUZZTRAIL assistant ID (supported by both voice and chat)
   assistant?: any; // Full assistant object (voice only)
   assistantOverrides?: any; // Assistant overrides (supported by both voice and chat)
 
@@ -127,13 +127,13 @@ The widget manages several state variables:
 - `isExpanded`: Controls widget expansion
 - `hasConsent`: Tracks user consent status
 - `chatInput`: Current chat input value
-- Voice state via `useVapiCall` hook
-- Chat state via `useVapiChat` hook
+- Voice state via `useBuzzTrailCall` hook
+- Chat state via `useBuzzTrailChat` hook
 - Combined conversation history
 
-### VAPI Integration
+### BUZZTRAIL Integration
 
-The widget supports three types of VAPI configuration:
+The widget supports three types of BUZZTRAIL configuration:
 
 ```typescript
 // Simple assistant ID (supports both voice and chat)
@@ -169,12 +169,12 @@ assistant: {
 #### Voice Mode (Default)
 
 ```tsx
-import { VapiWidget } from 'vapi-client-widget-web';
+import { BuzzTrailWidget } from 'buzztrail-client-widget-web';
 
 function App() {
   return (
-    <VapiWidget
-      publicKey="your-vapi-public-key"
+    <BuzzTrailWidget
+      publicKey="your-buzztrail-public-key"
       assistantId="your-assistant-id"
       position="bottom-right"
       theme="light"
@@ -190,8 +190,8 @@ function App() {
 #### Chat Mode
 
 ```tsx
-<VapiWidget
-  publicKey="your-vapi-public-key"
+<BuzzTrailWidget
+  publicKey="your-buzztrail-public-key"
   assistantId="your-assistant-id"
   mode="chat"
   theme="dark"
@@ -203,8 +203,8 @@ function App() {
 #### Hybrid Mode with Assistant Overrides
 
 ```tsx
-<VapiWidget
-  publicKey="your-vapi-public-key"
+<BuzzTrailWidget
+  publicKey="your-buzztrail-public-key"
   assistantId="your-assistant-id"
   assistantOverrides={{
     variableValues: { name: 'John' },
@@ -219,8 +219,8 @@ function App() {
 #### Voice Mode with Full Assistant Object
 
 ```tsx
-<VapiWidget
-  publicKey="your-vapi-public-key"
+<BuzzTrailWidget
+  publicKey="your-buzztrail-public-key"
   assistant={{
     model: {
       provider: 'openai',
@@ -247,9 +247,9 @@ function App() {
   </head>
   <body>
     <div
-      data-client-widget="VapiWidget"
+      data-client-widget="BuzzTrailWidget"
       data-props='{
-      "publicKey": "your-vapi-public-key",
+      "publicKey": "your-buzztrail-public-key",
       "assistantId": "your-assistant-id",
       "mode": "hybrid",
       "position": "bottom-right",
@@ -267,9 +267,9 @@ function App() {
 ```javascript
 const widget = new WidgetLoader({
   container: '#widget-container',
-  component: 'VapiWidget',
+  component: 'BuzzTrailWidget',
   props: {
-    publicKey: 'your-vapi-public-key',
+    publicKey: 'your-buzztrail-public-key',
     assistantId: 'your-assistant-id',
     assistantOverrides: {
       model: 'gpt-4',
@@ -363,7 +363,7 @@ const widget = new WidgetLoader({
 
 ```typescript
 // Example: Custom color scheme
-<VapiWidget
+<BuzzTrailWidget
   baseColor="#1a1a1a"        // Main background
   accentColor="#ff6b6b"      // Primary actions
   buttonBaseColor="#2a2a2a"  // Floating button bg
@@ -378,10 +378,10 @@ const widget = new WidgetLoader({
 Enable user consent flow:
 
 ```tsx
-<VapiWidget
+<BuzzTrailWidget
   requireConsent={true}
   termsContent="By using this service, you agree to..."
-  localStorageKey="my_app_vapi_consent"
+  localStorageKey="my_app_buzztrail_consent"
 />
 ```
 
@@ -390,7 +390,7 @@ Enable user consent flow:
 Provide helpful context-specific messages:
 
 ```tsx
-<VapiWidget
+<BuzzTrailWidget
   emptyVoiceMessage="Click the mic to start your conversation"
   emptyVoiceActiveMessage="I'm listening..."
   emptyChatMessage="Type your question below"
@@ -403,7 +403,7 @@ Provide helpful context-specific messages:
 Hide transcript for voice-only experiences:
 
 ```tsx
-<VapiWidget
+<BuzzTrailWidget
   mode="voice"
   showTranscript={false} // Shows only volume indicator
 />
@@ -411,16 +411,16 @@ Hide transcript for voice-only experiences:
 
 ## Integration Requirements
 
-### VAPI Setup
+### BUZZTRAIL Setup
 
-1. Create VAPI account at [vapi.ai](https://vapi.ai)
+1. Create BUZZTRAIL account at [buzztrail.ai](https://buzztrail.ai)
 2. Create an assistant or use inline configuration
 3. Get your public API key
 4. Configure assistant settings
 
 ### Dependencies
 
-- `@vapi-ai/web`: Core VAPI SDK
+- `@vapi-ai/web`: Core BUZZTRAIL SDK
 - `react`: React framework
 - `react-dom`: React DOM renderer
 - `react-markdown`: Markdown rendering
@@ -445,7 +445,7 @@ The widget handles common error scenarios:
 ### Connection Errors
 
 - Network connectivity issues
-- VAPI service unavailability
+- BUZZTRAIL service unavailability
 - Automatic retry mechanisms
 
 ### Configuration Errors
@@ -458,7 +458,7 @@ The widget handles common error scenarios:
 
 ### Optimizations
 
-- Lazy loading of VAPI SDK
+- Lazy loading of BUZZTRAIL SDK
 - Efficient re-rendering with React hooks
 - Debounced typing indicators
 - Smooth animations with CSS
@@ -490,13 +490,13 @@ Test different configurations:
 
 ```tsx
 // Test voice mode
-<VapiWidget publicKey="..." assistantId="..." mode="voice" />
+<BuzzTrailWidget publicKey="..." assistantId="..." mode="voice" />
 
 // Test chat mode
-<VapiWidget publicKey="..." assistantId="..." mode="chat" />
+<BuzzTrailWidget publicKey="..." assistantId="..." mode="chat" />
 
 // Test hybrid mode
-<VapiWidget publicKey="..." assistantId="..." mode="hybrid" />
+<BuzzTrailWidget publicKey="..." assistantId="..." mode="hybrid" />
 ```
 
 ## Troubleshooting
@@ -512,13 +512,13 @@ Test different configurations:
 #### Voice Not Working
 
 - Check microphone permissions
-- Verify VAPI credentials
+- Verify BUZZTRAIL credentials
 - Ensure HTTPS context
 - Try chat mode as fallback
 
 #### Chat Not Working
 
-- Verify VAPI configuration
+- Verify BUZZTRAIL configuration
 - Check network connectivity
 - Inspect console for API errors
 
@@ -534,5 +534,5 @@ Enable detailed logging:
 
 ```tsx
 // Check console for detailed logs
-window.DEBUG_VAPI = true;
+window.DEBUG_BUZZTRAIL = true;
 ```

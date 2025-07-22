@@ -25,7 +25,7 @@ export interface WidgetConfig {
   voiceShowTranscript: boolean;
   chatFirstMessage?: string;
 
-  // Vapi Configuration
+  // BuzzTrail Configuration
   apiUrl?: string;
   publicKey: string;
   assistantId?: string;

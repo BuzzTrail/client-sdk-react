@@ -1,20 +1,20 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import Vapi from '@vapi-ai/web';
+import BuzzTrail from '@vapi-ai/web';
 
-export interface VapiCallState {
+export interface BuzzTrailCallState {
   isCallActive: boolean;
   isSpeaking: boolean;
   volumeLevel: number;
   connectionStatus: 'disconnected' | 'connecting' | 'connected';
 }
 
-export interface VapiCallHandlers {
+export interface BuzzTrailCallHandlers {
   startCall: () => Promise<void>;
   endCall: () => Promise<void>;
   toggleCall: () => Promise<void>;
 }
 
-export interface UseVapiCallOptions {
+export interface UseBuzzTrailCallOptions {
   publicKey: string;
   callOptions: any;
   apiUrl?: string;
@@ -30,7 +30,7 @@ export interface UseVapiCallOptions {
   }) => void;
 }
 
-export const useVapiCall = ({
+export const useBuzzTrailCall = ({
   publicKey,
   callOptions,
   apiUrl,
@@ -40,9 +40,9 @@ export const useVapiCall = ({
   onMessage,
   onError,
   onTranscript,
-}: UseVapiCallOptions): VapiCallState & VapiCallHandlers => {
-  const [vapi] = useState(() =>
-    publicKey ? new Vapi(publicKey, apiUrl) : null
+}: UseBuzzTrailCallOptions): BuzzTrailCallState & BuzzTrailCallHandlers => {
+  const [buzztrail] = useState(() =>
+    publicKey ? new BuzzTrail(publicKey, apiUrl) : null
   );
 
   const [isCallActive, setIsCallActive] = useState(false);
@@ -71,7 +71,7 @@ export const useVapiCall = ({
   });
 
   useEffect(() => {
-    if (!vapi) {
+    if (!buzztrail) {
       return;
     }
 
@@ -116,66 +116,66 @@ export const useVapiCall = ({
     };
 
     const handleError = (error: Error) => {
-      console.error('Vapi error:', error);
+      console.error('BuzzTrail error:', error);
       setConnectionStatus('disconnected');
       setIsCallActive(false);
       setIsSpeaking(false);
       callbacksRef.current.onError?.(error);
     };
 
-    vapi.on('call-start', handleCallStart);
-    vapi.on('call-end', handleCallEnd);
-    vapi.on('speech-start', handleSpeechStart);
-    vapi.on('speech-end', handleSpeechEnd);
-    vapi.on('volume-level', handleVolumeLevel);
-    vapi.on('message', handleMessage);
-    vapi.on('error', handleError);
+    buzztrail.on('call-start', handleCallStart);
+    buzztrail.on('call-end', handleCallEnd);
+    buzztrail.on('speech-start', handleSpeechStart);
+    buzztrail.on('speech-end', handleSpeechEnd);
+    buzztrail.on('volume-level', handleVolumeLevel);
+    buzztrail.on('message', handleMessage);
+    buzztrail.on('error', handleError);
 
     return () => {
-      vapi.removeListener('call-start', handleCallStart);
-      vapi.removeListener('call-end', handleCallEnd);
-      vapi.removeListener('speech-start', handleSpeechStart);
-      vapi.removeListener('speech-end', handleSpeechEnd);
-      vapi.removeListener('volume-level', handleVolumeLevel);
-      vapi.removeListener('message', handleMessage);
-      vapi.removeListener('error', handleError);
+      buzztrail.removeListener('call-start', handleCallStart);
+      buzztrail.removeListener('call-end', handleCallEnd);
+      buzztrail.removeListener('speech-start', handleSpeechStart);
+      buzztrail.removeListener('speech-end', handleSpeechEnd);
+      buzztrail.removeListener('volume-level', handleVolumeLevel);
+      buzztrail.removeListener('message', handleMessage);
+      buzztrail.removeListener('error', handleError);
     };
-  }, [vapi]);
+  }, [buzztrail]);
 
   useEffect(() => {
     return () => {
-      if (vapi) {
-        vapi.stop();
+      if (buzztrail) {
+        buzztrail.stop();
       }
     };
-  }, [vapi]);
+  }, [buzztrail]);
 
   const startCall = useCallback(async () => {
-    if (!vapi || !enabled) {
-      console.error('Cannot start call: no vapi instance or not enabled');
+    if (!buzztrail || !enabled) {
+      console.error('Cannot start call: no buzztrail instance or not enabled');
       return;
     }
 
     try {
       console.log('Starting call with options:', callOptions);
       setConnectionStatus('connecting');
-      await vapi.start(callOptions);
+      await buzztrail.start(callOptions);
     } catch (error) {
       console.error('Error starting call:', error);
       setConnectionStatus('disconnected');
       callbacksRef.current.onError?.(error as Error);
     }
-  }, [vapi, callOptions, enabled]);
+  }, [buzztrail, callOptions, enabled]);
 
   const endCall = useCallback(async () => {
-    if (!vapi) {
-      console.log('Cannot end call: no vapi instance');
+    if (!buzztrail) {
+      console.log('Cannot end call: no buzztrail instance');
       return;
     }
 
     console.log('Ending call');
-    vapi.stop();
-  }, [vapi]);
+    buzztrail.stop();
+  }, [buzztrail]);
 
   const toggleCall = useCallback(async () => {
     if (isCallActive) {

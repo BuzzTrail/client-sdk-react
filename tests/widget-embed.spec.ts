@@ -6,7 +6,7 @@ declare global {
   }
 }
 
-test.describe('VapiWidget Embed Tests', () => {
+test.describe('BuzzTrailWidget Embed Tests', () => {
   test('should load widget from script tag with data attributes', async ({
     page,
   }) => {
@@ -19,7 +19,7 @@ test.describe('VapiWidget Embed Tests', () => {
     );
 
     // Check if widget container exists
-    const widget1 = await page.locator('#vapi-widget-1');
+    const widget1 = await page.locator('#buzztrail-widget-1');
     await expect(widget1).toBeAttached();
 
     // Check if the widget has been initialized (should have shadow root or child elements)
@@ -28,13 +28,13 @@ test.describe('VapiWidget Embed Tests', () => {
         const element = document.querySelector(selector);
         return element && (element.shadowRoot || element.children.length > 0);
       },
-      '#vapi-widget-1',
+      '#buzztrail-widget-1',
       { timeout: 3000 }
     );
 
     // Verify the widget has created some content (React root or shadow DOM)
     const widgetInitialized = await page.evaluate(() => {
-      const widget = document.querySelector('#vapi-widget-1');
+      const widget = document.querySelector('#buzztrail-widget-1');
       if (!widget) {
         return false;
       }
@@ -60,7 +60,7 @@ test.describe('VapiWidget Embed Tests', () => {
     );
 
     // Check if widget container exists
-    const widget2 = await page.locator('#vapi-widget-2');
+    const widget2 = await page.locator('#buzztrail-widget-2');
     await expect(widget2).toBeAttached();
 
     // Wait for widget initialization
@@ -69,13 +69,13 @@ test.describe('VapiWidget Embed Tests', () => {
         const element = document.querySelector(selector);
         return element && (element.shadowRoot || element.children.length > 0);
       },
-      '#vapi-widget-2',
+      '#buzztrail-widget-2',
       { timeout: 3000 }
     );
 
     // Verify the widget has been initialized
     const widgetInitialized = await page.evaluate(() => {
-      const widget = document.querySelector('#vapi-widget-2');
+      const widget = document.querySelector('#buzztrail-widget-2');
       if (!widget) {
         return false;
       }
@@ -88,7 +88,7 @@ test.describe('VapiWidget Embed Tests', () => {
     expect(widgetInitialized).toBe(true);
   });
 
-  test('should load widget from vapi-widget custom element', async ({
+  test('should load widget from buzztrail-widget custom element', async ({
     page,
   }) => {
     await page.goto('/test-widget-embed');
@@ -100,13 +100,13 @@ test.describe('VapiWidget Embed Tests', () => {
     );
 
     // Check if custom element exists
-    const customWidget = await page.locator('vapi-widget');
+    const customWidget = await page.locator('buzztrail-widget');
     await expect(customWidget).toBeAttached();
 
     // Wait for widget initialization
     await page.waitForFunction(
       () => {
-        const element = document.querySelector('vapi-widget');
+        const element = document.querySelector('buzztrail-widget');
         return element && (element.shadowRoot || element.children.length > 0);
       },
       { timeout: 3000 }
@@ -114,7 +114,7 @@ test.describe('VapiWidget Embed Tests', () => {
 
     // Verify the custom element has been initialized
     const widgetInitialized = await page.evaluate(() => {
-      const widget = document.querySelector('vapi-widget');
+      const widget = document.querySelector('buzztrail-widget');
       if (!widget) {
         return false;
       }

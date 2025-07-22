@@ -1,1 +1,1 @@
-export * from './vapiChatClient';
+export * from './buzztrailChatClient';

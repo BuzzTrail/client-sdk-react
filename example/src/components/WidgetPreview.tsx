@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { VapiWidget } from '../../../src';
+import { BuzzTrailWidget } from '../../../src';
 import type { WidgetConfig } from '../types';
 
 interface WidgetPreviewProps {
@@ -49,9 +49,9 @@ const WidgetPreview: React.FC<WidgetPreviewProps> = ({ config }) => {
 
             {/* Preview Widget */}
             {showPreview && (
-              <div className="absolute inset-0 p-2" id="vapi-widget-preview">
+              <div className="absolute inset-0 p-2" id="buzztrail-widget-preview">
                 <style>{`
-                  #vapi-widget-preview > div {
+                  #buzztrail-widget-preview > div {
                     position: absolute !important;
                     ${
                       config.position === 'bottom-right'
@@ -66,7 +66,7 @@ const WidgetPreview: React.FC<WidgetPreviewProps> = ({ config }) => {
                     max-height: calc(100% - 1rem) !important;
                   }
                 `}</style>
-                <VapiWidget
+                <BuzzTrailWidget
                   mode={config.mode}
                   theme={config.theme}
                   baseBgColor={config.baseBgColor}

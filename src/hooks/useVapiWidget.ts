@@ -1,14 +1,14 @@
 import { useState, useCallback } from 'react';
-import type { UseVapiCallOptions } from './useVapiCall';
-import { useVapiCall } from './useVapiCall';
-import type { UseVapiChatOptions, ChatMessage } from './useVapiChat';
-import { useVapiChat } from './useVapiChat';
-import type { AssistantOverrides } from '../utils/vapiChatClient';
+import type { UseBuzzTrailCallOptions } from './useBuzzTrailCall';
+import { useBuzzTrailCall } from './useBuzzTrailCall';
+import type { UseBuzzTrailChatOptions, ChatMessage } from './useBuzzTrailChat';
+import { useBuzzTrailChat } from './useBuzzTrailChat';
+import type { AssistantOverrides } from '../utils/buzztrailChatClient';
 
-export type VapiMode = 'voice' | 'chat' | 'hybrid';
+export type BuzzTrailMode = 'voice' | 'chat' | 'hybrid';
 
-export interface UseVapiWidgetOptions {
-  mode: VapiMode;
+export interface UseBuzzTrailWidgetOptions {
+  mode: BuzzTrailMode;
   publicKey: string;
   assistantId?: string;
   assistant?: any;
@@ -21,7 +21,7 @@ export interface UseVapiWidgetOptions {
   onError?: (error: Error) => void;
 }
 
-export const useVapiWidget = ({
+export const useBuzzTrailWidget = ({
   mode,
   publicKey,
   assistantId,
@@ -33,7 +33,7 @@ export const useVapiWidget = ({
   onCallEnd,
   onMessage,
   onError,
-}: UseVapiWidgetOptions) => {
+}: UseBuzzTrailWidgetOptions) => {
   const [activeMode, setActiveMode] = useState<'voice' | 'chat' | null>(null);
   const [isUserTyping, setIsUserTyping] = useState(false);
 
@@ -58,7 +58,7 @@ export const useVapiWidget = ({
 
   // Voice call hook - only enabled in voice or hybrid mode
   const voiceEnabled = mode === 'voice' || mode === 'hybrid';
-  const voice = useVapiCall({
+  const voice = useBuzzTrailCall({
     publicKey,
     callOptions: buildCallOptions(),
     apiUrl,
@@ -87,11 +87,11 @@ export const useVapiWidget = ({
       };
       setVoiceConversation((prev) => [...prev, message]);
     },
-  } as UseVapiCallOptions);
+  } as UseBuzzTrailCallOptions);
 
   // Chat only supports assistantId and assistantOverrides
   const chatEnabled = mode === 'chat' || mode === 'hybrid';
-  const chat = useVapiChat({
+  const chat = useBuzzTrailChat({
     enabled: chatEnabled,
     publicKey: chatEnabled ? publicKey : undefined,
     assistantId: chatEnabled ? assistantId : undefined,
@@ -100,7 +100,7 @@ export const useVapiWidget = ({
     onMessage, // Keep the callback for external notifications
     onError,
     firstChatMessage,
-  } as UseVapiChatOptions);
+  } as UseBuzzTrailChatOptions);
 
   // Combine voice and chat conversations
   const conversation =

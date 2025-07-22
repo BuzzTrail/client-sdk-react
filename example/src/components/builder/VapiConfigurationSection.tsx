@@ -1,12 +1,12 @@
 import React from 'react';
 import type { WidgetConfig } from '../../types';
 
-interface VapiConfigurationSectionProps {
+interface BuzzTrailConfigurationSectionProps {
   config: WidgetConfig;
   updateConfig: (key: keyof WidgetConfig, value: any) => void;
 }
 
-const VapiConfigurationSection: React.FC<VapiConfigurationSectionProps> = ({
+const BuzzTrailConfigurationSection: React.FC<BuzzTrailConfigurationSectionProps> = ({
   config,
   updateConfig,
 }) => {
@@ -35,18 +35,18 @@ const VapiConfigurationSection: React.FC<VapiConfigurationSectionProps> = ({
     <div className="bg-gray-50 rounded-lg p-6">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-medium text-gray-900">
-          Vapi Configuration
+          BuzzTrail Configuration
         </h2>
       </div>
       <p className="text-sm mb-6 text-gray-600">
-        Configure how the widget connects to Vapi AI. Provide at least one
+        Configure how the widget connects to BuzzTrail AI. Provide at least one
         configuration option.
       </p>
 
       {/* Public Key */}
       <div className="mb-6">
         <label className="block text-sm font-medium mb-2 text-gray-700">
-          Vapi Public Key *
+          BuzzTrail Public Key *
           <svg
             className="w-3 h-3 inline ml-1 text-gray-400"
             fill="currentColor"
@@ -60,10 +60,10 @@ const VapiConfigurationSection: React.FC<VapiConfigurationSectionProps> = ({
           value={config.publicKey}
           onChange={(e) => updateConfig('publicKey', e.target.value)}
           className="w-full p-2 rounded-md border bg-white border-gray-300 text-gray-900 font-mono text-sm"
-          placeholder="your-vapi-public-key"
+          placeholder="your-buzztrail-public-key"
         />
         <p className="text-xs mt-1 text-gray-500">
-          Get your public key from your Vapi dashboard
+          Get your public key from your BuzzTrail dashboard
         </p>
       </div>
 
@@ -155,4 +155,4 @@ const VapiConfigurationSection: React.FC<VapiConfigurationSectionProps> = ({
   );
 };
 
-export default VapiConfigurationSection;
+export default BuzzTrailConfigurationSection;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import '../styles/globals.css';
-import VapiWidget from '../components/VapiWidget';
+import BuzzTrailWidget from '../components/BuzzTrailWidget';
 
 export interface WidgetConfig {
   container: string | HTMLElement;
@@ -10,7 +10,7 @@ export interface WidgetConfig {
 }
 
 const COMPONENTS = {
-  VapiWidget,
+  BuzzTrailWidget,
 };
 
 class WidgetLoader {
@@ -66,10 +66,10 @@ function parseAttributeValue(value: string): any {
 }
 
 function initializeWidgets() {
-  const vapiElements = document.querySelectorAll(
-    '[data-client-widget="VapiWidget"]'
+  const buzztrailElements = document.querySelectorAll(
+    '[data-client-widget="BuzzTrailWidget"]'
   );
-  vapiElements.forEach((element) => {
+  buzztrailElements.forEach((element) => {
     const htmlElement = element as HTMLElement;
 
     // Extract props from data-props attribute (legacy support)
@@ -106,27 +106,27 @@ function initializeWidgets() {
     });
 
     if (!props.publicKey) {
-      console.warn('VapiWidget: publicKey is required but not provided');
+      console.warn('BuzzTrailWidget: publicKey is required but not provided');
       props.publicKey = 'demo-key';
     }
     if (!props.assistantId) {
-      console.warn('VapiWidget: assistantId is required but not provided');
+      console.warn('BuzzTrailWidget: assistantId is required but not provided');
       props.assistantId = 'demo-assistant';
     }
 
     try {
       new WidgetLoader({
         container: htmlElement,
-        component: 'VapiWidget',
+        component: 'BuzzTrailWidget',
         props,
       });
     } catch (error) {
-      console.error('Failed to initialize VapiWidget:', error);
+      console.error('Failed to initialize BuzzTrailWidget:', error);
     }
   });
 
-  const customVapiElements = document.querySelectorAll('vapi-widget');
-  customVapiElements.forEach((element) => {
+  const customBuzzTrailElements = document.querySelectorAll('buzztrail-widget');
+  customBuzzTrailElements.forEach((element) => {
     const htmlElement = element as HTMLElement;
     const props: any = {};
 
@@ -178,7 +178,7 @@ function initializeWidgets() {
       // API Configuration
       'api-url': 'apiUrl',
 
-      // Vapi Configuration
+      // BuzzTrail Configuration
       'public-key': 'publicKey',
       'assistant-id': 'assistantId',
       'assistant-overrides': 'assistantOverrides',
@@ -217,23 +217,23 @@ function initializeWidgets() {
     });
 
     if (!props.publicKey) {
-      console.warn('VapiWidget: publicKey is required but not provided');
+      console.warn('BuzzTrailWidget: publicKey is required but not provided');
       props.publicKey = 'demo-key';
     }
     if (!props.assistantId) {
-      console.warn('VapiWidget: assistantId is required but not provided');
+      console.warn('BuzzTrailWidget: assistantId is required but not provided');
       props.assistantId = 'demo-assistant';
     }
 
     try {
       new WidgetLoader({
         container: htmlElement,
-        component: 'VapiWidget',
+        component: 'BuzzTrailWidget',
         props,
       });
     } catch (error) {
       console.error(
-        'Failed to initialize VapiWidget from custom element:',
+        'Failed to initialize BuzzTrailWidget from custom element:',
         error
       );
     }
@@ -244,8 +244,8 @@ function initializeWidgets() {
     const htmlElement = element as HTMLElement;
     const componentName = htmlElement.getAttribute('data-client-widget');
 
-    // Skip if already processed as VapiWidget
-    if (componentName === 'VapiWidget') {
+    // Skip if already processed as BuzzTrailWidget
+    if (componentName === 'BuzzTrailWidget') {
       return;
     }
 

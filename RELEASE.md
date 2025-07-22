@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Ensure `NPM_TOKEN` is set in GitHub repository secrets
-- Have npm publishing permissions for `@vapi-ai/client-sdk-react`
+- Have npm publishing permissions for `@buzztrail-ai/client-sdk-react`
 
 ## Steps to Release
 
@@ -29,7 +29,7 @@
 
 4. **Verify**
    - Check [Actions](../../actions) tab for build status
-   - Confirm package on [npm](https://www.npmjs.com/package/@vapi-ai/client-sdk-react)
+   - Confirm package on [npm](https://www.npmjs.com/package/@buzztrail-ai/client-sdk-react)
 
 ## Version Types
 
