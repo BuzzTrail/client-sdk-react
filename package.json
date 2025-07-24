@@ -60,7 +60,7 @@
     "embeddable",
     "library"
   ],
-  "license": "MIT",
+  "license": "",
   "peerDependencies": {
     "@vapi-ai/web": "^2.3.7",
     "react": ">=16.8.0",
