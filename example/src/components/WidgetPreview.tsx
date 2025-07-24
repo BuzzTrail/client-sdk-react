@@ -63,7 +63,13 @@ const WidgetPreview: React.FC<WidgetPreviewProps> = ({ config }) => {
                           ? 'bottom: 0.5rem !important; left: 0.5rem !important; top: auto !important; right: auto !important;'
                           : config.position === 'top-right'
                             ? 'top: 0.5rem !important; right: 0.5rem !important; bottom: auto !important; left: auto !important;'
-                            : 'top: 0.5rem !important; left: 0.5rem !important; bottom: auto !important; right: auto !important;'
+                            : config.position === 'top-left'
+                              ? 'top: 0.5rem !important; left: 0.5rem !important; bottom: auto !important; right: auto !important;'
+                              : config.position === 'bottom-center'
+                                ? 'bottom: 0.5rem !important; left: 50% !important; transform: translateX(-50%) !important; top: auto !important; right: auto !important;'
+                                : config.position === 'center-center'
+                                  ? 'top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) !important; bottom: auto !important; right: auto !important;'
+                                  : 'top: 0.5rem !important; left: 0.5rem !important; bottom: auto !important; right: auto !important;'
                     }
                     max-width: calc(100% - 1rem) !important;
                     max-height: calc(100% - 1rem) !important;

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Center-Center Position</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+      p {
+        color: #666;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Test Page for Center-Center Position</h1>
+      <p>
+        This page tests the new 'center-center' position for the BuzzTrail
+        widget. The widget should appear in the exact center of the screen, both
+        horizontally and vertically.
+      </p>
+      <p>
+        You should see the widget floating in the center of the page, regardless
+        of the page content or scroll position.
+      </p>
+    </div>
+
+    <!-- Test the center-center position -->
+    <buzztrail-widget
+      public-key="test-key"
+      assistant-id="test-assistant"
+      mode="chat"
+      position="center-center"
+      theme="light"
+      size="compact"
+      title="Center Test"
+      cta-title="Chat with AI"
+      accent-color="#3B82F6"
+    ></buzztrail-widget>
+
+    <script src="./dist/embed/widget.umd.js"></script>
+  </body>
+</html>

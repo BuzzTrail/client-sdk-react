@@ -12,7 +12,8 @@ export interface WidgetConfig {
     | 'bottom-left'
     | 'top-right'
     | 'top-left'
-    | 'bottom-center';
+    | 'bottom-center'
+    | 'center-center';
   title: string;
   ctaTitle?: string;
   ctaSubtitle?: string;

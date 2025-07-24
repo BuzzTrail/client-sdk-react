@@ -14,7 +14,8 @@ export interface BuzzTrailWidgetProps {
     | 'bottom-left'
     | 'top-right'
     | 'top-left'
-    | 'bottom-center';
+    | 'bottom-center'
+    | 'center-center';
   size?: 'tiny' | 'compact' | 'full';
   borderRadius?: 'none' | 'small' | 'medium' | 'large';
 

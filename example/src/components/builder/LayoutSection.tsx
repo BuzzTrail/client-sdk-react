@@ -26,7 +26,14 @@ const LayoutSection: React.FC<LayoutSectionProps> = ({
         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors bg-white text-gray-900"
       >
         {(
-          ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const
+          [
+            'top-left',
+            'top-right',
+            'bottom-left',
+            'bottom-right',
+            'bottom-center',
+            'center-center',
+          ] as const
         ).map((position) => (
           <option key={position} value={position}>
             {position

@@ -418,14 +418,6 @@ Hide transcript for voice-only experiences:
 3. Get your public API key
 4. Configure assistant settings
 
-### Dependencies
-
-- `@vapi-ai/web`: Core BUZZTRAIL SDK
-- `react`: React framework
-- `react-dom`: React DOM renderer
-- `react-markdown`: Markdown rendering
-- `@phosphor-icons/react`: Icon library
-
 ### Browser Requirements
 
 - Modern browser with WebRTC support (for voice)

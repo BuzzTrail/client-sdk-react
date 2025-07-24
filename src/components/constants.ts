@@ -95,6 +95,7 @@ export const positionClasses = {
   'top-right': 'top-6 right-6',
   'top-left': 'top-6 left-6',
   'bottom-center': 'bottom-6 left-1/2 -translate-x-1/2',
+  'center-center': 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
 };
 
 export const positionStyles = {
@@ -106,5 +107,10 @@ export const positionStyles = {
     bottom: '1.5rem',
     left: '50%',
     transform: 'translateX(-50%)',
+  },
+  'center-center': {
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
   },
 };

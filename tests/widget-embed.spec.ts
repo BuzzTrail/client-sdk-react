@@ -99,8 +99,8 @@ test.describe('BuzzTrailWidget Embed Tests', () => {
       { timeout: 5000 }
     );
 
-    // Check if custom element exists
-    const customWidget = await page.locator('buzztrail-widget');
+    // Check if custom element exists (target the first one specifically)
+    const customWidget = await page.locator('buzztrail-widget').first();
     await expect(customWidget).toBeAttached();
 
     // Wait for widget initialization
@@ -112,9 +112,52 @@ test.describe('BuzzTrailWidget Embed Tests', () => {
       { timeout: 3000 }
     );
 
-    // Verify the custom element has been initialized
+    // Verify the widget has been initialized
     const widgetInitialized = await page.evaluate(() => {
       const widget = document.querySelector('buzztrail-widget');
+      if (!widget) {
+        return false;
+      }
+      return (
+        widget.children.length > 0 ||
+        widget.shadowRoot !== null ||
+        widget.innerHTML !== ''
+      );
+    });
+    expect(widgetInitialized).toBe(true);
+  });
+
+  test('should support center-center position', async ({ page }) => {
+    await page.goto('/test-widget-embed');
+
+    // Wait for the widget script to load
+    await page.waitForFunction(
+      () => (window as any).WidgetLoader !== undefined,
+      { timeout: 5000 }
+    );
+
+    // Check if the center-center widget exists
+    const centerWidget = await page.locator(
+      'buzztrail-widget[position="center-center"]'
+    );
+    await expect(centerWidget).toBeAttached();
+
+    // Wait for widget initialization
+    await page.waitForFunction(
+      () => {
+        const element = document.querySelector(
+          'buzztrail-widget[position="center-center"]'
+        );
+        return element && (element.shadowRoot || element.children.length > 0);
+      },
+      { timeout: 3000 }
+    );
+
+    // Verify the widget has been initialized
+    const widgetInitialized = await page.evaluate(() => {
+      const widget = document.querySelector(
+        'buzztrail-widget[position="center-center"]'
+      );
       if (!widget) {
         return false;
       }
