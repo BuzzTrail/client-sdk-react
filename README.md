@@ -55,56 +55,56 @@ The simplest way to add the widget to your website:
 
 ### Required Props
 
-| Prop        | Type     | Description              |
-| ----------- | -------- | ------------------------ |
+| Prop        | Type     | Description                   |
+| ----------- | -------- | ----------------------------- |
 | `publicKey` | `string` | Your BUZZTRAIL public API key |
 
 ### BUZZTRAIL Configuration Props
 
-| Prop                 | Type     | Description                                            |
-| -------------------- | -------- | ------------------------------------------------------ |
-| `assistantId`        | `string` | BUZZTRAIL assistant ID (supported by both voice and chat)   |
-| `assistant`          | `object` | Full assistant configuration object (voice only)       |
-| `assistantOverrides` | `object` | Assistant overrides (supported by both voice and chat) |
+| Prop                 | Type     | Description                                               |
+| -------------------- | -------- | --------------------------------------------------------- |
+| `assistantId`        | `string` | BUZZTRAIL assistant ID (supported by both voice and chat) |
+| `assistant`          | `object` | Full assistant configuration object (voice only)          |
+| `assistantOverrides` | `object` | Assistant overrides (supported by both voice and chat)    |
 
 > **Note**: You must provide at least one of `assistantId`, `assistant`, or both `assistantId` and `assistantOverrides`.
 
 ### Optional Props
 
-| Prop                      | Type                                                                              | Default                  | Description                        |
-| ------------------------- | --------------------------------------------------------------------------------- | ------------------------ | ---------------------------------- |
-| `mode`                    | `'voice' \| 'chat' \| 'hybrid'`                                                   | `'chat'`                 | Widget interaction mode            |
-| `theme`                   | `'light' \| 'dark'`                                                               | `'light'`                | Color theme                        |
-| `position`                | `'bottom-right' \| 'bottom-left' \| 'top-right' \| 'top-left' \| 'bottom-center'` | `'bottom-right'`         | Screen position                    |
-| `size`                    | `'tiny' \| 'compact' \| 'full'`                                                   | `'full'`                 | Widget size                        |
-| `borderRadius`            | `'none' \| 'small' \| 'medium' \| 'large'`                                        | `'medium'`               | Corner radius style                |
-| `apiUrl`                  | `string`                                                                          | -                        | Custom API endpoint for chat mode  |
-| **Colors**                |                                                                                   |                          |                                    |
-| `baseBgColor`             | `string`                                                                          | -                        | Main background color              |
-| `accentColor`             | `string`                                                                          | `'#14B8A6'`              | Primary accent color               |
-| `ctaButtonColor`          | `string`                                                                          | `'#000000'`              | CTA button background color        |
-| `ctaButtonTextColor`      | `string`                                                                          | `'#FFFFFF'`              | CTA button text/icon color         |
-| **Text Labels**           |                                                                                   |                          |                                    |
-| `title`                   | `string`                                                                          | `'Talk with AI'`         | Main widget title                  |
-| `startButtonText`         | `string`                                                                          | `'Start'`                | Voice call start button text       |
-| `endButtonText`           | `string`                                                                          | `'End Call'`             | Voice call end button text         |
-| `ctaTitle`                | `string`                                                                          | _(uses title)_           | Floating button main text          |
-| `ctaSubtitle`             | `string`                                                                          | -                        | Floating button subtitle text      |
-| **Empty States**          |                                                                                   |                          |                                    |
-| `voiceEmptyMessage`       | `string`                                                                          | -                        | Message when voice mode is empty   |
-| `voiceActiveEmptyMessage` | `string`                                                                          | -                        | Message during active voice call   |
-| `chatEmptyMessage`        | `string`                                                                          | -                        | Message when chat is empty         |
-| `hybridEmptyMessage`      | `string`                                                                          | -                        | Message for hybrid mode            |
-| **Chat Configuration**    |                                                                                   |                          |                                    |
-| `chatFirstMessage`        | `string`                                                                          | -                        | Initial assistant message in chat  |
-| `chatPlaceholder`         | `string`                                                                          | `'Type your message...'` | Chat input placeholder text        |
-| **Voice Configuration**   |                                                                                   |                          |                                    |
-| `voiceShowTranscript`     | `boolean`                                                                         | `false`                  | Show/hide voice transcript         |
-| **Consent Configuration** |                                                                                   |                          |                                    |
-| `consentRequired`         | `boolean`                                                                         | `false`                  | Show consent form before first use |
-| `consentTitle`            | `string`                                                                          | `"Terms and conditions"` | Consent form title                 |
-| `consentContent`          | `string`                                                                          | _(default message)_      | Terms & conditions content         |
-| `consentStorageKey`       | `string`                                                                          | `"buzztrail_widget_consent"`  | Key for storing consent            |
+| Prop                      | Type                                                                              | Default                      | Description                        |
+| ------------------------- | --------------------------------------------------------------------------------- | ---------------------------- | ---------------------------------- |
+| `mode`                    | `'voice' \| 'chat' \| 'hybrid'`                                                   | `'chat'`                     | Widget interaction mode            |
+| `theme`                   | `'light' \| 'dark'`                                                               | `'light'`                    | Color theme                        |
+| `position`                | `'bottom-right' \| 'bottom-left' \| 'top-right' \| 'top-left' \| 'bottom-center'` | `'bottom-right'`             | Screen position                    |
+| `size`                    | `'tiny' \| 'compact' \| 'full'`                                                   | `'full'`                     | Widget size                        |
+| `borderRadius`            | `'none' \| 'small' \| 'medium' \| 'large'`                                        | `'medium'`                   | Corner radius style                |
+| `apiUrl`                  | `string`                                                                          | -                            | Custom API endpoint for chat mode  |
+| **Colors**                |                                                                                   |                              |                                    |
+| `baseBgColor`             | `string`                                                                          | -                            | Main background color              |
+| `accentColor`             | `string`                                                                          | `'#14B8A6'`                  | Primary accent color               |
+| `ctaButtonColor`          | `string`                                                                          | `'#000000'`                  | CTA button background color        |
+| `ctaButtonTextColor`      | `string`                                                                          | `'#FFFFFF'`                  | CTA button text/icon color         |
+| **Text Labels**           |                                                                                   |                              |                                    |
+| `title`                   | `string`                                                                          | `'Talk with AI'`             | Main widget title                  |
+| `startButtonText`         | `string`                                                                          | `'Start'`                    | Voice call start button text       |
+| `endButtonText`           | `string`                                                                          | `'End Call'`                 | Voice call end button text         |
+| `ctaTitle`                | `string`                                                                          | _(uses title)_               | Floating button main text          |
+| `ctaSubtitle`             | `string`                                                                          | -                            | Floating button subtitle text      |
+| **Empty States**          |                                                                                   |                              |                                    |
+| `voiceEmptyMessage`       | `string`                                                                          | -                            | Message when voice mode is empty   |
+| `voiceActiveEmptyMessage` | `string`                                                                          | -                            | Message during active voice call   |
+| `chatEmptyMessage`        | `string`                                                                          | -                            | Message when chat is empty         |
+| `hybridEmptyMessage`      | `string`                                                                          | -                            | Message for hybrid mode            |
+| **Chat Configuration**    |                                                                                   |                              |                                    |
+| `chatFirstMessage`        | `string`                                                                          | -                            | Initial assistant message in chat  |
+| `chatPlaceholder`         | `string`                                                                          | `'Type your message...'`     | Chat input placeholder text        |
+| **Voice Configuration**   |                                                                                   |                              |                                    |
+| `voiceShowTranscript`     | `boolean`                                                                         | `false`                      | Show/hide voice transcript         |
+| **Consent Configuration** |                                                                                   |                              |                                    |
+| `consentRequired`         | `boolean`                                                                         | `false`                      | Show consent form before first use |
+| `consentTitle`            | `string`                                                                          | `"Terms and conditions"`     | Consent form title                 |
+| `consentContent`          | `string`                                                                          | _(default message)_          | Terms & conditions content         |
+| `consentStorageKey`       | `string`                                                                          | `"buzztrail_widget_consent"` | Key for storing consent            |
 
 ### Event Callbacks
 

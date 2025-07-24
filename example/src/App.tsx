@@ -41,8 +41,10 @@ function App() {
     voiceShowTranscript: false,
     chatFirstMessage: 'Hey, How can I help you today?',
     // BuzzTrail Configuration
-    publicKey: import.meta.env.VITE_BUZZTRAIL_API_KEY || 'your-buzztrail-public-key',
-    assistantId: import.meta.env.VITE_BUZZTRAIL_ASSISTANT_ID || 'demo-assistant-id',
+    publicKey:
+      import.meta.env.VITE_BUZZTRAIL_API_KEY || 'your-buzztrail-public-key',
+    assistantId:
+      import.meta.env.VITE_BUZZTRAIL_ASSISTANT_ID || 'demo-assistant-id',
     assistantOverrides: {
       variableValues: { name: 'John' },
     },

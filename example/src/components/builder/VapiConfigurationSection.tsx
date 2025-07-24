@@ -6,10 +6,9 @@ interface BuzzTrailConfigurationSectionProps {
   updateConfig: (key: keyof WidgetConfig, value: any) => void;
 }
 
-const BuzzTrailConfigurationSection: React.FC<BuzzTrailConfigurationSectionProps> = ({
-  config,
-  updateConfig,
-}) => {
+const BuzzTrailConfigurationSection: React.FC<
+  BuzzTrailConfigurationSectionProps
+> = ({ config, updateConfig }) => {
   const handleAssistantOverridesChange = (field: string, value: string) => {
     const newOverrides = {
       ...config.assistantOverrides,

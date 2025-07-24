@@ -49,7 +49,10 @@ const WidgetPreview: React.FC<WidgetPreviewProps> = ({ config }) => {
 
             {/* Preview Widget */}
             {showPreview && (
-              <div className="absolute inset-0 p-2" id="buzztrail-widget-preview">
+              <div
+                className="absolute inset-0 p-2"
+                id="buzztrail-widget-preview"
+              >
                 <style>{`
                   #buzztrail-widget-preview > div {
                     position: absolute !important;
