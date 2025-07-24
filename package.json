@@ -47,16 +47,10 @@
     "name": "BuzzTrail AI",
     "url": "https://buzztrail.ai"
   },
-  "contributors": [
-    {
-      "name": "ramsrib",
-      "url": "https://github.com/ramsrib"
-    }
-  ],
-  "homepage": "https://github.com/BuzzTrailAI/client-sdk-react#readme",
-  "repository": "https://github.com/BuzzTrailAI/client-sdk-react",
+  "homepage": "https://github.com/BuzzTrail/client-sdk-react#readme",
+  "repository": "https://github.com/BuzzTrail/client-sdk-react",
   "bugs": {
-    "url": "https://github.com/BuzzTrailAI/client-sdk-react/issues"
+    "url": "https://github.com/BuzzTrail/client-sdk-react/issues"
   },
   "keywords": [
     "buzztrail",
@@ -66,7 +60,7 @@
     "embeddable",
     "library"
   ],
-  "license": "",
+  "license": "MIT",
   "peerDependencies": {
     "@vapi-ai/web": "^2.3.7",
     "react": ">=16.8.0",
